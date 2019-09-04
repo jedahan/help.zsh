@@ -11,8 +11,8 @@ help [--os <type>] <command|all>
      all    List all commands
 
 Try `help --os linux tar`'; return; fi
-  echo $* | grep -q all && tldr --list && return
-  tldr -q $* || { tldr -q -o linux $* || command man $* }
+  echo $* | grep -q ^all$ && tldr --list && return
+  tldr -q $* || { tldr -q -o linux $* || ${functions[man]:-${commands[man]}} $* }
 }
 
 (( $+functions[h] )) || alias h=help
